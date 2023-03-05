@@ -8,7 +8,7 @@ class ApplicationController < Sinatra::Base
   end
   get "/doctors" do
     doctors = Doctor.all
-    doctors.to_json
+    doctors.to_json(include: :patients)
   end
   patch '/doctors/:id' do
     doctor = Doctor.find(params[:id])
@@ -28,13 +28,14 @@ class ApplicationController < Sinatra::Base
   delete '/doctors/:id' do
     doctor = Doctor.find(params[:id])
     doctor.destroy
-    doctor.to_json
+    # doctor.to_json
   end
   delete '/patients/:id' do
     patient = Patient.find(params[:id])
     patient.destroy
     patient.to_json
   end
+ 
 
 
 end
